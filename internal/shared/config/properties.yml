@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+api:
+  holiday:
+    url: https://api.victorsanmartin.com/feriados/en.json
