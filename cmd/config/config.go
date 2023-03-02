@@ -36,7 +36,7 @@ func LoadConfig(path string) (config Config, err error) {
 
 	// Set undefined variables
 	viper.SetDefault("server.port", "8080")
-	viper.SetDefault("api.holiday.url", "https://api.victorsanmartin.com/feriados/en.json?extra=%22Civil%22")
+	viper.SetDefault("api.holiday.url", "https://api.victorsanmartin.com/feriados/en.json")
 
 	err = viper.Unmarshal(&config)
 	if err != nil {
