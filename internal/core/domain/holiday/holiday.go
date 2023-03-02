@@ -94,7 +94,7 @@ func ValidateHolidayDate(date string) error {
 
 // Repository is the storage abstraction
 type Repository interface {
-	Find(ctx context.Context, extra string) ([]Holiday, error)
+	Find(ctx context.Context, date string) ([]Holiday, error)
 	FindOne(ctx context.Context, extra string) (Holiday, error)
 	LoadAll(ctx context.Context, holidays []Holiday) error
 }

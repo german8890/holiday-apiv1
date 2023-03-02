@@ -14,11 +14,11 @@ type Repository struct {
 	fetcher fetcher.Service
 }
 
-func (r *Repository) Find(ctx context.Context, extra string) ([]holiday.Holiday, error) {
-	if extra != "" {
+func (r *Repository) Find(ctx context.Context, date string) ([]holiday.Holiday, error) {
+	if date != "" {
 		var locals []holiday.Holiday
 		for _, v := range r.list {
-			if v.Extra == extra {
+			if v.Extra == date {
 				locals = append(locals, v)
 			}
 		}
