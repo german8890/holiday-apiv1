@@ -69,7 +69,7 @@ api:
 ##### Request for holidays in a given `extra` and type `json`
 
 bash
-$ curl -X GET "http://localhost:8080/api/v1/holidays?extra=Civil&date="
+$ curl -X GET "http://localhost:8080/api/v1/holidays/extra?extra=Civil"
 
 
 #### type=JSON (default)
@@ -101,7 +101,8 @@ json5
 ##### Request for holidays in a given `extra` and type `xml`
 
 bash
-$ curl -X GET "http://localhost:8080/api/v1/holidays?extra=civil&type=xml"
+$ curl -X GET "http://localhost:8080/api/v1/holidays/date?date=2023-01-02"
+$ curl -X GET  "http://localhost:8080/api/v1/holidays/extra?extra=Civil"
 
 
 #### type=XML
