@@ -17,11 +17,11 @@ func NewFinderDateHolidays(repository holiday.Repository) *FinderDateHolidays {
 }
 
 // Execute finder in the repository of holiday
-func (f *FinderDateHolidays) Execute(ctx context.Context, extra string) ([]holiday.Holiday, error) {
-	if err := holiday.ValidateHolidayExtra(extra); err != nil {
+func (f *FinderDateHolidays) Execute(ctx context.Context, date string) ([]holiday.Holiday, error) {
+	if err := holiday.ValidateHolidayDate(date); err != nil {
 		return nil, err
 	}
-	holidaysList, err := f.holidaysRepository.Find(ctx, extra)
+	holidaysList, err := f.holidaysRepository.Find(ctx, date)
 	if err != nil {
 		return nil, err
 	}

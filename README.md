@@ -2,42 +2,43 @@
 
 ## Description
 
-This is a simple script to find holidays in a given city.
+This is a script that allows to find the holidays.
 
 ## Development
 
 ### Usage (go ~ docker ~ docker-compose)
 
-```bash
+bash
 ## go executable
 $ go run cmd/main.go
-```
 
-```bash
+
+bash
 ## Build the image
 $ docker build -t holidays-seeker .
 
 ## Run the container with the image
 $ docker run -it holidays-seeker
- ```
+ 
 
-```bash
+bash
 ## Build the image and run the container (add '-d' for detached mode)
 $ docker-compose up --build 
-```
+
 
 ### Configs
 
 #### Configuration file format in YAML, loaded from `./internal/shared/config/config.yml` file.
 
-```yaml
+yaml
 server:
   port: 8080
 
 api:
   holiday:
-    url: https://farmanet.minsal.cl/index.php/ws/getLocales
-```
+    url: https://api.victorsanmartin.com/feriados/en.json
+        
+
 
 ### Tools
 
@@ -50,7 +51,7 @@ api:
 - [Testify](github.com/stretchr/testify)
 ### Requirements
 
-- Go 1.18
+- Go 1.19
 - Docker
 - Docker Compose
 - Make
@@ -61,69 +62,73 @@ api:
 #### host: `localhost:8080`
 #### prefix: `/api/v1`
 
-- `GET /holidays?extra={extra}&type={type}`
+- `GET /holidays?extra={extra}&date={date}`
 
 ### Examples
 
 ##### Request for holidays in a given `extra` and type `json`
 
-```bash
-$ curl -X GET "http://localhost:8080/api/v1/holidays?extra=Civil&type="
-```
+bash
+$ curl -X GET "http://localhost:8080/api/v1/holidays?extra=Civil&date="
+
 
 #### type=JSON (default)
 
-```json5
+json5
 {
-  "message": "OK",
+ "status": "success",
   "data": [
     {
-      "local_nombre": "CRUZ VERDE",
-      "comuna_nombre": "Civil",
-      "local_direccion": "LOS GINKOS 5 LOCAL 11,12,13",
-      "local_telefono": "+56322857355"
+      "date": "2023-01-01",
+      "title": "Año Nuevo",
+      "type": "Civil",
+      "inalienable": true,
+      "extra": "Civil e Irrenunciable"
     },
     {
-      "local_nombre": "CRUZ VERDE",
-      "comuna_nombre": "Civil",
-      "local_direccion": "AV. CON CON REÑACA 3850 LOCAL 1013",
-      "local_telefono": "+56322858104"
+      "date": "2023-01-02",
+      "title": "Feriado Adicional",
+      "type": "Civil",
+      "inalienable": false,
+      "extra": "Civil"
     },
   ]
 }
-````
+`
 
 --
 
 ##### Request for holidays in a given `extra` and type `xml`
 
-```bash
-$ curl -X GET "http://localhost:8080/api/v1/holidays?extra=Civil&type=xml"
-```
+bash
+$ curl -X GET "http://localhost:8080/api/v1/holidays?extra=civil&type=xml"
+
 
 #### type=XML
 
-```xml
+xml
 
 <Holidays>
     <Holiday>
-        <local_nombre>CRUZ VERDE</local_nombre>
-        <comuna_nombre>Civil</comuna_nombre>
-        <local_direccion>LOS GINKOS 5 LOCAL 11,12,13</local_direccion>
-        <local_telefono>+56322857355</local_telefono>
+        <date>2023-01-01</date>
+        <title>Año Nuevo</title>
+        <type>Civil</type>
+        <inalienable>true</inalienable>
+        <extra>Civil e Irrenunciable</extra>
     </Holiday>
     <Holiday>
-        <local_nombre>CRUZ VERDE</local_nombre>
-        <comuna_nombre>Civil</comuna_nombre>
-        <local_direccion>AV. CON CON REÑACA 3850 LOCAL 1013</local_direccion>
-        <local_telefono>+56322858104</local_telefono>
+        <date>2023-01-02</date>
+        <title>Feriado Adicional</title>
+        <type>Civil</type>
+        <inalienable>false</inalienable>
+        <extra>Civil</extra>
     </Holiday>
 </Holidays>
-```
+
 
 ### Swagger
 
-```shell
+shell
 
 # To generate a swagger spec document for a go application
 $ swagger generate spec -o ./swagger.json

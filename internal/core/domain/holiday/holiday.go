@@ -80,7 +80,14 @@ type HolidayXML struct {
 
 func ValidateHolidayExtra(name string) error {
 	if name == "" {
-		return errors.New("name is empty")
+		return errors.New("extra is empty")
+	}
+	return nil
+}
+
+func ValidateHolidayDate(date string) error {
+	if date == "" {
+		return errors.New("Date is empty")
 	}
 	return nil
 }
