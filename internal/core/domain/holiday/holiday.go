@@ -42,7 +42,7 @@ func (r *Holiday) ToXMLInterface() (HolidayXML, error) {
 type Holidays struct {
 	// The holidays
 	// in: body
-	Holidays []Holiday `json:"holidays,omitempty" xml:"holidays,omitempty"`
+	Holidays []Holiday `json:"data,omitempty" xml:"data,omitempty"`
 }
 
 // Holiday is a holiday

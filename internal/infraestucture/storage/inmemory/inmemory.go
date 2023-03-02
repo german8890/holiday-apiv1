@@ -18,7 +18,7 @@ func (r *Repository) Find(ctx context.Context, date string) ([]holiday.Holiday, 
 	if date != "" {
 		var locals []holiday.Holiday
 		for _, v := range r.list {
-			if v.Extra == date {
+			if v.Date == date {
 				locals = append(locals, v)
 			}
 		}

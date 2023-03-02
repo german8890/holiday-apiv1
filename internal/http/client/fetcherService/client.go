@@ -31,14 +31,15 @@ func (c *apiClientHTTP) RetrieveHolidays(ctx context.Context) ([]holiday.Holiday
 	// The error referring to ï is because the UTF-8 BOM interpreted as an ISO-8859-1 string will produce the characters ï»¿.
 	bodyBytes = bytes.TrimPrefix(bodyBytes, []byte("\xef\xbb\xbf")) // Or []byte{239, 187, 191}
 
-	var holidays []holiday.Holiday
+	var holidays holiday.Holidays
 
 	err = json.Unmarshal(bodyBytes, &holidays)
 	if err != nil {
 		return nil, err
 	}
 
-	return holidays, nil
+	holidateout := holidays.Holidays
+	return holidateout, nil
 }
 
 func NewFetcherService(c config.Config) fetcher.Service {
